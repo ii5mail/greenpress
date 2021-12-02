@@ -1,0 +1,24 @@
+{
+  "name": "@greenpress/cache-manager",
+  "version": "2.0.15",
+  "description": "",
+  "main": "./dist/index.js",
+  "private": false,
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "redis": "3.0.2"
+  },
+  "devDependencies": {
+    "@types/redis": "^2.8.31",
+    "typescript": "^4.2.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "e9b7e45274425af89f502ba0a3f43d68d83fe92e"
+}

@@ -1,0 +1,91 @@
+version: '3'
+services:
+  redis:
+    image: redis
+  admin:
+    image: greenpress/admin-panel:${ADMIN_PANEL_VERSION}
+  assets:
+    image: greenpress/assets:${ASSETS_SERVICE_VERSION}
+    restart: always
+    environment:
+      MONGO_URI: ${ASSETS_MONGODB_URI}
+      REDIS_URL: redis://redis
+      SECRETS_SERVICE_URL: secrets
+      SECRETS_SERVICE_PORT: 9002
+      AUTH_SERVICE_URL: auth
+      SECRETS_TOKEN: ${ASSETS_SECRETS_TOKEN}
+      INTERNAL_SECRET: ${INTERNAL_SECRET}
+      IP: 0.0.0.0
+    depends_on:
+      - redis
+      - secrets
+    links:
+      - redis
+      - secrets
+  auth:
+    image: greenpress/auth:${AUTH_SERVICE_VERSION}
+    restart: always
+    environment:
+      MONGO_URI: ${AUTH_MONGODB_URI}
+      IP: 0.0.0.0
+      JWT_SECRET: ${JWT_SECRET}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
+      APPLICATION_URL: ${APPLICATION_URL}
+  blog-front:
+    image: greenpress/blog-front:${BLOG_FRONT_VERSION}
+    ports:
+      - ${PORT}:3000
+    depends_on:
+      - content
+      - auth
+      - assets
+      - admin
+      - drafts
+    links:
+      - content
+      - auth
+      - assets
+      - admin
+      - drafts
+    environment:
+      IP: 0.0.0.0
+      THEME: ${THEME}
+      TENANT: ${TENANT}
+      APPLICATION_URL: ${APPLICATION_URL}
+      CONTENT_SERVICE_URL: content
+      AUTH_SERVICE_URL: auth
+      ASSETS_SERVICE_URL: assets
+      DRAFTS_SERVICE_URL: drafts
+      ADMIN_PANEL_URL: admin
+  content:
+    image: greenpress/content:${CONTENT_SERVICE_VERSION}
+    restart: always
+    environment:
+      MONGO_URI: ${CONTENT_MONGODB_URI}
+      REDIS_URL: redis://redis
+      IP: 0.0.0.0
+      AUTH_SERVICE_URL: auth
+    depends_on:
+      - redis
+      - auth
+    links:
+      - redis
+      - auth
+  secrets:
+    image: greenpress/secrets:${SECRETS_SERVICE_VERSION}
+    restart: always
+    environment:
+      MONGO_URI: ${SECRETS_MONGODB_URI}
+      IP: 0.0.0.0
+      PORT: 9002
+      SECRET: ${SECRETS_SERVICE_SECRET}
+      INTERNAL_SECRET: ${INTERNAL_SECRET}
+  drafts:
+    image: greenpress/drafts:${DRAFTS_SERVICE_VERSION}
+    restart: always
+    environment:
+      MONGO_URI: ${DRAFTS_MONGODB_URI}
+      IP: 0.0.0.0
+
+networks:
+  common_network:

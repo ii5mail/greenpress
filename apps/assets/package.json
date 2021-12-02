@@ -1,0 +1,46 @@
+{
+  "name": "@greenpress/assets",
+  "version": "2.0.15",
+  "license": "MIT",
+  "author": "David Meir-Levy <davidmeirlevy@gmail.com>",
+  "description": "manage assets like images and static files on remote servers",
+  "keywords": [
+    "express",
+    "mongoose",
+    "greenpress",
+    "storage-management",
+    "assets-management"
+  ],
+  "engines": {
+    "npm": ">=5",
+    "node": ">=10.5"
+  },
+  "scripts": {
+    "start": "node --use_strict index.js"
+  },
+  "main": "index.js",
+  "bin": {
+    "greenpress-assets": "index.js"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^5.4.0",
+    "@greenpress/api-kit": "^2.0.15",
+    "aws-sdk": "^2.860.0",
+    "ftp": "^0.3.10",
+    "mongoose": "^5.10.5",
+    "multer": "^1.4.2",
+    "uniqid": "^5.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/greenpress/greenpress#readme",
+  "bugs": {
+    "url": "https://github.com/greenpress/greenpress/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/greenpress/greenpress.git"
+  },
+  "gitHead": "9637edf2fa2dd74d99c6dfa6b4e8daa0c8776d15"
+}

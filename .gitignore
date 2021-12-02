@@ -1,0 +1,12 @@
+node_modules
+.idea
+db-data
+compose/.env
+compose/*.env
+tmp
+dist
+common/temp
+*.log
+greenpress-*.tgz
+*.lerna_backup
+coverage

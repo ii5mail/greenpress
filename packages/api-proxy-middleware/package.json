@@ -1,0 +1,32 @@
+{
+  "name": "@greenpress/api-proxy-middleware",
+  "version": "2.0.17",
+  "description": "api proxy middleware",
+  "author": "David Meir-Levy <davidmeirlevy@gmail.com>",
+  "homepage": "https://github.com/greenpress/greenpress#readme",
+  "private": false,
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "http-proxy-middleware": "^1.3.1",
+    "node-fetch": "^2.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greenpress/greenpress.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/greenpress/greenpress/issues"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "e9b7e45274425af89f502ba0a3f43d68d83fe92e"
+}
